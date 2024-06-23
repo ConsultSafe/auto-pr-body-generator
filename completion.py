@@ -30,7 +30,7 @@ class Completion:
 
     def _complete_prompt(self) -> str:
         response = self._openai_client.Completion.create(
-            model="gpt-3.5-turbo-instruct", prompt=self._prompt.text, max_tokens=2048
+            model="gpt-3.5-turbo", prompt=self._prompt.text, max_tokens=8192
         )
         return response.choices[0].text
 
