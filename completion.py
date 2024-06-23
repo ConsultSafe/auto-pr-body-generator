@@ -29,10 +29,23 @@ class Completion:
         return self._state
 
     def _complete_prompt(self) -> str:
-        response = self._openai_client.Completion.create(
-            model="gpt-3.5-turbo", prompt=self._prompt.text, max_tokens=8192
+        messages = [
+            {"role": "system", "content": """
+            You are an expert at summarising code changes in Pull Requests concisely and accurately for developers to have insight before reading the code.
+            Format the following text into a Pull Request Body with the following headings in markdown format: 
+             - Summary 
+             - List of changes 
+             - Refactoring Target
+             Remove duplicate information.
+
+            The following message will contain the text to format.
+            """},
+            {"role": "user", "content": self._prompt.text},
+        ]
+        response = self._openai_client.ChatCompletion.create(
+            model="gpt-3.5-turbo", messages=messages, max_tokens=8192
         )
-        return response.choices[0].text
+        return response.choices[0].message['content']
 
     def complete(self):
         logging.info(f"completion_{self.id} - Completing prompt...")
