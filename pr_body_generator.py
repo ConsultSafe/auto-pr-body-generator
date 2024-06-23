@@ -9,7 +9,7 @@ class PrBodyGenerator:
     PR_BODY_PROMPT = Prompt(
         inspect.cleandoc(
             """ 
-            Format the following text into a Pull Request Body with the following sections: 
+            Format the following text into a Pull Request Body with the following sections in markdown: 
              - Summary 
              - List of changes 
              - Refactoring Target
