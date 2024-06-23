@@ -43,7 +43,7 @@ class Completion:
             {"role": "user", "content": self._prompt.text},
         ]
         response = self._openai_client.ChatCompletion.create(
-            model="gpt-3.5-turbo", messages=messages, max_tokens=16384
+            model="gpt-3.5-turbo", messages=messages, max_tokens=1024
         )
         return response.choices[0].message['content']
 
