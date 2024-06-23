@@ -3,7 +3,7 @@ from typing import Union
 
 
 class Prompt:
-    MAX_TOKENS = 8192
+    MAX_TOKENS = 12288
     MODEL = "gpt-3.5-turbo"
 
     def __init__(self, text: str, max_tokens: Union[int, None] = None):
